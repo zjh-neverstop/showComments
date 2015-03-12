@@ -8,6 +8,12 @@ var DropdownTree = (function(){
     /**
      * 定义字符串常量，图标名称
      */
+	/*-- 1、将图标换成空白 --*/
+	/*-- 2、删除文件夹图标，根节点、非根节点和最后一个节点都要进行删除 --*/
+	/*-- 3、signalArray.push("blank")换成signalArray.push(blank) --*/
+	/*-- 3、signalArray[k]+"'.png>"换成signalArray[k]+"'>" --*/
+
+    /*var I = "I.png";
     var L = "L.png";
     var T = "T.png";
     var LMINUS = "Lminus.png";
@@ -15,7 +21,18 @@ var DropdownTree = (function(){
     var LPLUS = "Lplus.png";
     var TPLUS = "Tplus.png";
     var FOLDERICON = "foldericon.png";
-    var OPENFOLDERICON = "openfoldericon.png";
+    var OPENFOLDERICON = "openfoldericon.png";*/
+
+	var I = "blank.png";
+    var L = "blank.png";
+    var T = "blank.png";
+    var LMINUS = "blank.png";
+    var TMINUS = "blank.png";
+    var LPLUS = "blank.png";
+    var TPLUS = "blank.png";
+    var FOLDERICON = "blank.png";
+    var OPENFOLDERICON = "blank.png";
+	var blank = "blank.png";
 
     var level = 0;
 
@@ -196,22 +213,23 @@ var DropdownTree = (function(){
             {
                 if(i == (treeArray.length-1)) //第一层的最后一个节点的图标不一样
                 {
-                    obj.html += "<div><div id='level"+treeArray[i].level+"_"+treeArray[i].id+"'><img src=\"images/"+LMINUS+"\"><img src=\"images/"+OPENFOLDERICON+"\"><span>"+treeArray[i].name+"</span></div>";
+                    obj.html += "<div><div id='level"+treeArray[i].level+"_"+treeArray[i].id+"'><div style='width:50px;height:50px;position:absolute;background:url(http://ds.cdncache.org/avatar-50/578/81666.jpg)'></div><div style='margin-left:50px;padding:2px 2px 2px 10px;'><span>"+treeArray[i].name+"</span></div></div>";
                 }
                 else
-                    obj.html += "<div><div id='level"+treeArray[i].level+"_"+treeArray[i].id+"'><img src=\"images/"+TMINUS+"\"><img src=\"images/"+OPENFOLDERICON+"\"><span>"+treeArray[i].name+"</span></div>";
+                    obj.html += "<div><div id='level"+treeArray[i].level+"_"+treeArray[i].id+"'><div style='width:50px;height:50px;position:absolute;background:url(http://ds.cdncache.org/avatar-50/578/81666.jpg)'></div><div style='margin-left:50px;padding:2px 2px 2px 10px;'><span>"+treeArray[i].name+"</span></div></div>";
 
                 //控制标签的显示，如果有子节点，则将所有的子节点放在<div>标签里面
                 if(Boolean(treeArray[i].array))
                 {
-                    obj.html += "<div>"
+                    //obj.html += "<div style='margin-left:"+(treeArray[i].level)*50+"px'>"
+					obj.html += "<div style='margin-left:50px'>"
                 }
 
                 if(i == (treeArray.length-1))
                 {
                     if(Boolean(treeArray[i].array))  //有子节点
                     {
-                        signalArray.push("blank");
+                        signalArray.push(blank);
                         generateTreeHtml(obj,treeArray[i].array,signalArray);
                         signalArray.pop();
                     }
@@ -221,7 +239,7 @@ var DropdownTree = (function(){
                 {
                     if(Boolean(treeArray[i].array))  //有子节点
                     {
-                        signalArray.push("I");
+                        signalArray.push(I);
                         generateTreeHtml(obj,treeArray[i].array,signalArray);
                         signalArray.pop();
                     }
@@ -238,14 +256,14 @@ var DropdownTree = (function(){
             else    //非根节点
             {
                 //添加对应的外层图片
-                var outerbiaoqian="";
+                /*var outerbiaoqian="";
                 var innerbiaoqian="";
                 if(signalArray.length>0)
                 {
 
                     for(var k=0; k<signalArray.length;k++)
                     {
-                        outerbiaoqian += "<img src='images/"+signalArray[k]+".png'>"
+                        outerbiaoqian += "<img src='images/"+signalArray[k]+"'>"
                     }
                 }
 
@@ -255,7 +273,7 @@ var DropdownTree = (function(){
                     if(Boolean(treeArray[i].array))
                     {
                         //并且有子节点
-                        innerbiaoqian+="<img src='images/"+LMINUS+"'><img src='images/"+OPENFOLDERICON+"'>";
+                        innerbiaoqian+="<img src='images/"+LMINUS+"'>";
                         //signalArray.push("blank");
                     }
                     else
@@ -271,7 +289,7 @@ var DropdownTree = (function(){
                     if(Boolean(treeArray[i].array))
                     {
                         //并且有子节点
-                        innerbiaoqian+="<img src='images/"+TMINUS+"'><img src='images/"+OPENFOLDERICON+"'>";
+                        innerbiaoqian+="<img src='images/"+TMINUS+"'>";
                     }
                     else
                     {
@@ -279,24 +297,24 @@ var DropdownTree = (function(){
                         innerbiaoqian+="<img src='images/"+T+"'>";
                     }
 
-                }
+                }*/
 
 
                 if(Boolean(treeArray[i].array))  //有子节点
                 {
-                    obj.html += "<div id='level"+treeArray[i].level+"_"+treeArray[i].id+"'>"+outerbiaoqian+innerbiaoqian+"<span>"+treeArray[i].name+"</span></div><div>";
+                    obj.html += "<div style='position:relative;' id='level"+treeArray[i].level+"_"+treeArray[i].id+"'><div style='width:50px;height:50px;position:absolute;background:url(http://ds.cdncache.org/avatar-50/578/81666.jpg)'></div><div style='margin-left:50px;padding:2px 2px 2px 10px;'><span>"+treeArray[i].name+"</span></div></div><div style='margin-left:50px'>";
                     if(i == treeArray.length-1) //最后一个节点
                     {
-                        signalArray.push("blank");
+                        signalArray.push(blank);
                     }
                     else
-                        signalArray.push("I");
+                        signalArray.push(I);
                     generateTreeHtml(obj,treeArray[i].array,signalArray);
                     signalArray.pop();
                     obj.html += "</div>";
                 }
                 else   //没有子节点
-                    obj.html += "<div id='level"+treeArray[i].level+"_"+treeArray[i].id+"'>"+outerbiaoqian+innerbiaoqian+"<span>"+treeArray[i].name+"</span></div>";
+                    obj.html += "<div style='position:relative;' id='level"+treeArray[i].level+"_"+treeArray[i].id+"'><div style='width:50px;height:50px;position:absolute;background:url(http://ds.cdncache.org/avatar-50/578/81666.jpg)'></div><div style='margin-left:50px;padding:2px 2px 2px 10px;'><span>"+treeArray[i].name+"</span></div></div>";
 
             }
         }
@@ -440,10 +458,12 @@ var DropdownTree = (function(){
                 this.success = true;
             }
             
-            tree_additionalFunction(this);
+            //tree_additionalFunction(this);
             
             //调整树形div的宽度并定位
             positionDiv(this.controlID, this.treeDivId);
+
+			//$("#"+this.treeDivId).html(this.html);
         }
     };
 
